@@ -48,13 +48,13 @@ public abstract class PalacePiece extends StaticPositionedPiece {
             AlivePieces alivePieces,
             List<Intersection> movableIntersections
     ) {
-        Piece rightPiece = alivePieces.placedAt(destination);
-
         if (destination.isOutOfBoard()) {
             return;
         }
 
-        if (alivePieces.isEmpty(destination) || rightPiece.hasDifferentSide(side)) {
+        Piece placedAtDestination = alivePieces.placedAt(destination);
+
+        if (placedAtDestination.hasDifferentSide(side)) {
             movableIntersections.add(destination);
         }
     }

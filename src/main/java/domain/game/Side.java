@@ -1,8 +1,10 @@
 package domain.game;
 
+import domain.board.Intersection;
 import domain.direction.Direction;
 import domain.direction.Down;
 import domain.direction.Left;
+import domain.direction.MoveAmount;
 import domain.direction.Right;
 import domain.direction.Up;
 import java.util.List;
@@ -20,7 +22,12 @@ public enum Side {
             return HAN;
         }
     },
-    ;
+    NONE(0, new NoDirection(), new NoDirection()) {
+        @Override
+        public Side nextTurn() {
+            return NONE;
+        }
+    };
 
     private final int baseRow;
     private final Direction forwardDirection;
@@ -65,4 +72,37 @@ public enum Side {
     }
 
     public abstract Side nextTurn();
+
+    private static class NoDirection implements Direction {
+
+        @Override
+        public Intersection moveForward(Intersection currentIntersection, MoveAmount moveAmount) {
+            return currentIntersection;
+        }
+
+        @Override
+        public Intersection moveLeft(Intersection currentIntersection, MoveAmount moveAmount) {
+            return currentIntersection;
+        }
+
+        @Override
+        public Intersection moveRight(Intersection currentIntersection, MoveAmount moveAmount) {
+            return currentIntersection;
+        }
+
+        @Override
+        public Intersection moveForwardLeft(Intersection currentIntersection, MoveAmount moveAmount) {
+            return currentIntersection;
+        }
+
+        @Override
+        public Intersection moveForwardRight(Intersection currentIntersection, MoveAmount moveAmount) {
+            return currentIntersection;
+        }
+
+        @Override
+        public Direction reverse() {
+            return this;
+        }
+    }
 }

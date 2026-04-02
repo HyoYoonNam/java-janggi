@@ -34,7 +34,7 @@ public class AlivePieces {
     }
 
     public Piece placedAt(Intersection intersection) {
-        return alivePieces.get(intersection);
+        return alivePieces.getOrDefault(intersection, new EmptyPiece());
     }
 
     public boolean placedSameSide(Intersection intersection, Side side) {
